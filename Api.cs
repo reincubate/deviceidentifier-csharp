@@ -3,9 +3,12 @@ using Newtonsoft.Json.Linq;
 
 using Reincubate.DeviceIdentifier.Util;
 
+using RestSharp;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace Reincubate.DeviceIdentifier {
 
@@ -46,10 +49,13 @@ namespace Reincubate.DeviceIdentifier {
                 identifiers = new { unknown = identifier }
             } );
 
-            var response = client.Execute( request ); 
-            
-            //if ( response.status_code != 200 )
-            //  throw new Exception( "API call not successful, response code %s:\n%s" % ( response.status_code, response.content ) )
+            var response = client.Execute( request );
+
+
+            if ( response.StatusCode != HttpStatusCode.OK ) {
+                return null;
+                //  throw new Exception( "API call not successful, response code %s:\n%s" % ( response.status_code, response.content ) )
+            }
 
             var json = JObject.Parse( response.Content );
 
@@ -73,8 +79,10 @@ namespace Reincubate.DeviceIdentifier {
 
             var response = client.Execute( request );
 
-            //if ( response.status_code != 200 )
-            //  throw new Exception( "API call not successful, response code %s:\n%s" % ( response.status_code, response.content ) )
+            if ( response.StatusCode != HttpStatusCode.OK ) {
+                return null;
+                //  throw new Exception( "API call not successful, response code %s:\n%s" % ( response.status_code, response.content ) )
+            }
 
             var deserialised = JsonConvert.DeserializeObject<Response>( response.Content );
             return deserialised;
