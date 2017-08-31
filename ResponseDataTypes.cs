@@ -57,8 +57,9 @@ namespace Reincubate.DeviceIdentifier {
         public String svn { get; set; }
         public String checksum { get; set; }
         public String serial { get; set; }
+        public ReportingBodyIdentifier reportingBodyIdentifier { get; set; }
+        public TypeAllocationCode tac { get; set; }
         public String type { get; set; }
-        public String tac { get; set; }
     }
 
     public class GsmaIccid {
@@ -71,11 +72,23 @@ namespace Reincubate.DeviceIdentifier {
 
         [JsonProperty("switch")]
         public String switchProperty { get; set; }
-        public String country { get; set; }
         public GsmaIssuer issuer { get; set; }
     }
 
     // Supporting objects.
+
+    public class TypeAllocationCode {
+        public String code { get; set; }
+        public String manufacturer { get; set; }
+        public String model { get; set; }
+        public String modelCode { get; set; }
+    }
+
+    public class ReportingBodyIdentifier {
+        public String code { get; set; }
+        public String group { get; set; }
+        public String origin { get; set; }
+    }
 
     public class UniqueId {
         public String productionNo { get; set; }
@@ -106,6 +119,12 @@ namespace Reincubate.DeviceIdentifier {
     }
 
     public class GsmaIssuer {
+        public String code { get; set; }
+        public String name { get; set; }
+        public IsoCountry country { get; set; }
+    }
+
+    public class IsoCountry {
         public String code { get; set; }
         public String name { get; set; }
     }
