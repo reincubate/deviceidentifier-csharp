@@ -72,7 +72,7 @@ Check out the Open Source libraries for working with the API:
 
 ## Troubleshooting
 
-See the [support & service status](https://docs.reincubate.com/ricloud/status/?utm_source=github&utm_medium=deviceidentifier-py&utm_campaign=deviceidentifier) page.
+See the [support & service status](https://docs.reincubate.com/ricloud/status/?utm_source=github&utm_medium=deviceidentifier-csharp&utm_campaign=deviceidentifier) page.
 
 ## <a name="more"></a>Need more functionality?
 
@@ -90,7 +90,7 @@ The company can help users with:
 * Custom iOS app data extraction
 * Advanced PList, TypedStream and Mbdb manipulation
 
-Contact [Reincubate](https://www.reincubate.com/?utm_source=github&utm_medium=deviceidentifier-py&utm_campaign=deviceidentifier) for more information.
+Contact [Reincubate](https://www.reincubate.com/?utm_source=github&utm_medium=deviceidentifier-csharp&utm_campaign=deviceidentifier) for more information.
 
 ## Terms & license
 
