@@ -3,11 +3,11 @@
 using System;
 
 namespace Reincubate.DeviceIdentifier {
-        
+
     // Response objects.
 
     public class Response {
-        public IdentifierResponse identifiers { get; set; } 
+        public IdentifierResponse identifiers { get; set; }
         public System system { get; set; }
     }
 
@@ -80,7 +80,7 @@ namespace Reincubate.DeviceIdentifier {
     public class TypeAllocationCode {
         public String code { get; set; }
         public String manufacturer { get; set; }
-        public String model { get; set; }
+        public String product { get; set; }
         public String modelCode { get; set; }
     }
 
