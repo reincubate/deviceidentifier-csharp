@@ -1,0 +1,1 @@
+you can run 'msbuild /t:pack /p:Configuration=Release' to build a nupkg
