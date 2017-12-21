@@ -65,16 +65,7 @@ namespace Reincubate.DeviceIdentifier
 
             var request = new RestRequest("identify-identifier/", Method.POST);
 
-            request.AddJsonBody(new
-            {
-                data = new
-                {
-                    identifiers = new
-                    {
-                        unknown = identifier
-                    }
-                }
-            });
+            request.AddJsonBody(new { identifiers = new { unknown = identifier } });
 
             var response = client.Execute(request);
 
@@ -96,13 +87,7 @@ namespace Reincubate.DeviceIdentifier
         {
             RestRequest request = new RestRequest("enhance-metadata/", Method.POST);
 
-            request.AddJsonBody(new
-            {
-                data = new
-                {
-                    identifiers = identifiers
-                },
-            });
+            request.AddJsonBody(new { identifiers = identifiers });
 
             var response = client.Execute(request);
 

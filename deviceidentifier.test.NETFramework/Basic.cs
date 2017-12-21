@@ -23,12 +23,12 @@ namespace deviceidentifier.test.NETFramework
 
             var identifiers = new Identifiers
             (
-              _apple_model: null, // We don't have this yet
-              _apple_serial: "ABC123",
-              _apple_identifier: "ios1000",
-              _gsma_imei: "LOL",
-              _gsma_iccid: "1234",
-              _cdma_meid: "memememememe"
+                _apple_model: null,
+                _apple_serial: "F4LPW1R7G5MN",
+                _apple_identifier: "iPhone7,2",
+                _gsma_imei: "352031078910204",
+                _gsma_iccid: "8940101608230954908",
+                _cdma_meid: "35203107891020"
             );
 
             Response response = api.EnhanceMetadata(identifiers);
