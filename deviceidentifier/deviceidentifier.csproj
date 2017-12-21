@@ -24,17 +24,8 @@
     <PackageReference Include="RestSharp" Version="105.2.3" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
-    <PackageReference Include="RestSharp.NetCore" Version="105.2.3"/>
+    <PackageReference Include="RestSharp.NetCore" Version="105.2.3" />
     <None Include="RestSharp.NetCore.Extensions.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove=".gitignore" />
-    <None Remove="*.swp" />
-    <None Remove="*.nuspec" />
-    <None Remove="LICENSE" />
-    <None Remove="*.config" />
-    <None Remove="*.md" />
-    <None Remove="*.nupkg" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
