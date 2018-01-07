@@ -1,6 +1,6 @@
 # deviceidentifier
 
-Utils to manipulate and learn from assorted device identifier formats via Reincubate's API.
+Utils to manipulate and learn from assorted device identifier formats via Reincubate's DeviceIdentifier API.
 
 ## Getting started
 
