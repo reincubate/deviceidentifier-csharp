@@ -11,8 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\deviceidentifier-csharp\deviceidentifier.csproj" />
-    <ProjectReference Include="..\deviceidentifier.csproj" />
     <ProjectReference Include="..\deviceidentifier\deviceidentifier.csproj" />
   </ItemGroup>
 
