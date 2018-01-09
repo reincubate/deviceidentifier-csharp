@@ -91,7 +91,7 @@ namespace Reincubate.DeviceIdentifier
             client.Authenticator = new ApiAuthenticator(token);
         }
 
-        public Response Lookup( String type, String identifier )
+        public Object Lookup( String type, String identifier )
         {
             var request = new RestRequest( String.Format( "v1/{0}/{1}/", new object[] { type, identifier } ), Method.GET );
             var response = client.Execute(request);
@@ -112,8 +112,32 @@ namespace Reincubate.DeviceIdentifier
                 }
             }
 
-            var deserialised = JsonConvert.DeserializeObject<Response>(response.Content);
-            return deserialised;
+            switch( type ) {
+                case Api.TYPE_APPLE_ANUMBER:
+                    return JsonConvert.DeserializeObject<AppleANumber>(response.Content);
+                case Api.TYPE_APPLE_IDENTIFIER:
+                    return JsonConvert.DeserializeObject<AppleIdentifier>(response.Content);
+                case Api.TYPE_APPLE_IDFA:
+                    return JsonConvert.DeserializeObject<AppleIdfa>(response.Content);
+                case Api.TYPE_APPLE_INTERNAL_NAME:
+                    return JsonConvert.DeserializeObject<AppleInternalName>(response.Content);
+                case Api.TYPE_APPLE_MODEL:
+                    return JsonConvert.DeserializeObject<AppleModel>(response.Content);
+                case Api.TYPE_APPLE_SERIAL:
+                    return JsonConvert.DeserializeObject<AppleSerial>(response.Content);
+                case Api.TYPE_APPLE_UDID:
+                    return JsonConvert.DeserializeObject<AppleUdid>(response.Content);
+                case Api.TYPE_CDMA_MEID:
+                    return JsonConvert.DeserializeObject<CdmaMeid>(response.Content);
+                case Api.TYPE_GSMA_ICCID:
+                    return JsonConvert.DeserializeObject<GsmaIccid>(response.Content);
+                case Api.TYPE_GSMA_IMEI:
+                    return JsonConvert.DeserializeObject<GsmaImei>(response.Content);
+                case Api.TYPE_GSMA_TAC:
+                    return JsonConvert.DeserializeObject<GsmaTac>(response.Content);
+            }
+
+            throw new BadRequestException( "Didn't know how to interpret server's response" );
         }
 
         public IList<String> IdentifyIdentifier(String identifier)
