@@ -1,4 +1,4 @@
-# deviceidentifier
+# DeviceIdentifier API C# / .NET library
 
 Utils to manipulate and learn from assorted device identifier formats via Reincubate's DeviceIdentifier API.
 
