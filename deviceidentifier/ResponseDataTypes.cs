@@ -41,15 +41,15 @@ namespace Reincubate.DeviceIdentifier {
         public String formatted { get; set; }
         public bool compromised { get; set; }
     }
-
+    
     public class AppleInternalName {
-        public AppleIdentifier apple_identifier { get; set; }
+        public AppleIdentifier appleIdentifier { get; set; }
     }
-
+    
     public class AppleModel {
         public String id { get; set; }
         public String anonymised { get; set; }
-        public AppleIdentifier appleIdentifer { get; set; }
+        public AppleIdentifier appleIdentifier { get; set; }
         public ModelRegion region { get; set; }
         public ModelSpecification code { get; set; }
         public String type { get; set; }
