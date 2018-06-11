@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+using Newtonsoft.Json.Serialization;
 using Reincubate.DeviceIdentifier.Util;
 
 using RestSharp;
@@ -192,8 +192,24 @@ namespace Reincubate.DeviceIdentifier
                 }
             }
 
-            var deserialised = JsonConvert.DeserializeObject<Response>(response.Content);
+            var settings = new JsonSerializerSettings();
+#if DEBUG
+            settings.MissingMemberHandling = MissingMemberHandling.Error;
+            settings.ContractResolver = new RequireObjectPropertiesContractResolver();
+#endif
+
+            var deserialised = JsonConvert.DeserializeObject<Response>(response.Content, settings);
             return deserialised;
+        }
+    }
+
+    class RequireObjectPropertiesContractResolver : DefaultContractResolver
+    {
+        protected override JsonObjectContract CreateObjectContract(Type objectType)
+        {
+            var contract = base.CreateObjectContract(objectType);
+            contract.ItemRequired = Required.AllowNull;
+            return contract;
         }
     }
 }

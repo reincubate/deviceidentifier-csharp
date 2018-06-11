@@ -53,6 +53,7 @@ namespace deviceidentifier.test.NETFramework
 
             Response response = api.EnhanceMetadata(identifiers);
             Assert.IsNotNull(response);
+            Assert.IsNotNull(response.apple_internal_name.appleIdentifier);
         }
     }
 }
