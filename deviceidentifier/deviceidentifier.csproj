@@ -13,12 +13,12 @@
     <Copyright>Copyright © 2017</Copyright>
     <Description>Utils to manipulate and learn from assorted device identifier formats via Reincubate's API.</Description>
     <PackageId>Reincubate.DeviceIdentifier</PackageId>
-    <PackageVersion>1.0.3.0</PackageVersion>
+    <PackageVersion>1.0.5.0</PackageVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageTags>ios</PackageTags>
     <PackageLicenseUrl>https://github.com/reincubate/deviceidentifier-csharp/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/reincubate/deviceidentifier-csharp/</PackageProjectUrl>
-    <Version>1.0.3</Version>
+    <Version>1.0.5</Version>
     <Company>Reincubate</Company>
     <PackageIconUrl>https://www.reincubate.com/favicon.ico</PackageIconUrl>
   </PropertyGroup>
