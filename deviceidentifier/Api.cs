@@ -55,18 +55,6 @@ namespace Reincubate.DeviceIdentifier
 
     public class Api
     {
-        public const String TYPE_APPLE_ANUMBER = "apple-anumbers";
-        public const String TYPE_APPLE_IDENTIFIER = "apple-identifiers";
-        public const String TYPE_APPLE_IDFA = "apple-idfas";
-        public const String TYPE_APPLE_INTERNAL_NAME = "apple-internal-names";
-        public const String TYPE_APPLE_MODEL = "apple-models";
-        public const String TYPE_APPLE_SERIAL = "apple-serials";
-        public const String TYPE_APPLE_UDID = "apple-udids";
-        public const String TYPE_CDMA_MEID = "cdma-meids";
-        public const String TYPE_GSMA_ICCID = "gsma-iccids";
-        public const String TYPE_GSMA_IMEI = "gsma-imeis";
-        public const String TYPE_GSMA_TAC = "gsma-tacs";
-
         class ApiAuthenticator : IAuthenticator
         {
             readonly String token;
@@ -91,8 +79,11 @@ namespace Reincubate.DeviceIdentifier
             client.Authenticator = new ApiAuthenticator(token);
         }
 
-        public Object Lookup( String type, String identifier )
+        public T Lookup<T>(String identifier) where T : ApiLookup
         {
+            if(!ApiLookup.GetApiName<T>(out String type))
+                throw new BadRequestException("Didn't know how to interpret server's response");
+
             var request = new RestRequest( String.Format( "v1/{0}/{1}/", new object[] { type, identifier } ), Method.GET );
             var response = client.Execute(request);
 
@@ -111,33 +102,7 @@ namespace Reincubate.DeviceIdentifier
                         throw new UnhandledException( errorResponse.message );
                 }
             }
-
-            switch( type ) {
-                case Api.TYPE_APPLE_ANUMBER:
-                    return JsonConvert.DeserializeObject<AppleANumber>(response.Content);
-                case Api.TYPE_APPLE_IDENTIFIER:
-                    return JsonConvert.DeserializeObject<AppleIdentifier>(response.Content);
-                case Api.TYPE_APPLE_IDFA:
-                    return JsonConvert.DeserializeObject<AppleIdfa>(response.Content);
-                case Api.TYPE_APPLE_INTERNAL_NAME:
-                    return JsonConvert.DeserializeObject<AppleInternalName>(response.Content);
-                case Api.TYPE_APPLE_MODEL:
-                    return JsonConvert.DeserializeObject<AppleModel>(response.Content);
-                case Api.TYPE_APPLE_SERIAL:
-                    return JsonConvert.DeserializeObject<AppleSerial>(response.Content);
-                case Api.TYPE_APPLE_UDID:
-                    return JsonConvert.DeserializeObject<AppleUdid>(response.Content);
-                case Api.TYPE_CDMA_MEID:
-                    return JsonConvert.DeserializeObject<CdmaMeid>(response.Content);
-                case Api.TYPE_GSMA_ICCID:
-                    return JsonConvert.DeserializeObject<GsmaIccid>(response.Content);
-                case Api.TYPE_GSMA_IMEI:
-                    return JsonConvert.DeserializeObject<GsmaImei>(response.Content);
-                case Api.TYPE_GSMA_TAC:
-                    return JsonConvert.DeserializeObject<GsmaTac>(response.Content);
-            }
-
-            throw new BadRequestException( "Didn't know how to interpret server's response" );
+            return JsonConvert.DeserializeObject<T>(response.Content);
         }
 
         public IList<String> IdentifyIdentifier(String identifier)
@@ -194,10 +159,11 @@ namespace Reincubate.DeviceIdentifier
 
             var settings = new JsonSerializerSettings();
 #if DEBUG
+            /// This is useful to find out where new things have been added in the api.
             settings.MissingMemberHandling = MissingMemberHandling.Error;
+            /// This is useful to find out where new things have been removed in the api.
             settings.ContractResolver = new RequireObjectPropertiesContractResolver();
 #endif
-
             var deserialised = JsonConvert.DeserializeObject<Response>(response.Content, settings);
             return deserialised;
         }

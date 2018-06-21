@@ -2,12 +2,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Reincubate.DeviceIdentifier
 {
-
     // Response objects.
-
     public class ErrorResponse
     {
         public String type { get; set; }
@@ -31,25 +31,63 @@ namespace Reincubate.DeviceIdentifier
         public GsmaTac gsma_tac { get; set; }
     }
 
-    public class AppleANumber
+    public class ApiLookup
+    {
+        internal ApiLookup() { }   
+        public static bool GetApiName<T>(out String name) where T : ApiLookup
+        {
+            LookupByAttribute attr = null;
+#if NetStandard
+            var ti = typeof(T).GetTypeInfo();
+            if (ti.IsDefined(typeof(LookupByAttribute)))
+                attr = ti.GetCustomAttribute<LookupByAttribute>();
+#else
+            var ti = typeof(T);
+            var atrs = ti.GetCustomAttributes(typeof(LookupByAttribute), true);
+            if (atrs.Count() > 0) attr = atrs.First() as LookupByAttribute;
+#endif
+
+            if (attr != null)
+            {
+                name = attr.ApiName;
+                return true;
+            }
+            else
+            {
+                name = null;
+                return false;
+            }
+        }
+    }
+    internal class LookupByAttribute : Attribute
+    {
+        public readonly string ApiName;
+        public LookupByAttribute(String apiName) => ApiName = apiName;
+    }
+
+    [LookupBy("apple-anumbers")]
+    public class AppleANumber : ApiLookup
     {
         public AppleIdentifier appleIdentifier { get; set; }
     }
 
-    public class AppleIdfa
+    [LookupBy("apple-idfas")]
+    public class AppleIdfa : ApiLookup
     {
         public String anonymised { get; set; }
         public String formatted { get; set; }
     }
 
-    public class AppleUdid
+    [LookupBy("apple-udids")]
+    public class AppleUdid : ApiLookup
     {
         public String anonymised { get; set; }
         public String formatted { get; set; }
         public bool compromised { get; set; }
     }
 
-    public class AppleInternalName
+    [LookupBy("apple-internal-names")]
+    public class AppleInternalName : ApiLookup
     {
         public String id { get; set; }
         public String anonymised { get; set; }
@@ -57,7 +95,8 @@ namespace Reincubate.DeviceIdentifier
         public Tss tss { get; set; }
     }
 
-    public class AppleModel
+    [LookupBy("apple-models")]
+    public class AppleModel : ApiLookup
     {
         public String id { get; set; }
         public String anonymised { get; set; }
@@ -67,7 +106,8 @@ namespace Reincubate.DeviceIdentifier
         public String type { get; set; }
     }
 
-    public class AppleSerial
+    [LookupBy("apple-serials")]
+    public class AppleSerial : ApiLookup
     {
         public String id { get; set; }
         public String anonymised { get; set; }
@@ -78,7 +118,8 @@ namespace Reincubate.DeviceIdentifier
         public Manufacturer manufacturing { get; set; }
     }
 
-    public class AppleIdentifier
+    [LookupBy("apple-identifiers")]
+    public class AppleIdentifier : ApiLookup
     {
         public String id { get; set; }
         public Image image { get; set; }
@@ -86,7 +127,8 @@ namespace Reincubate.DeviceIdentifier
         public String variant { get; set; }
     }
 
-    public class CdmaMeid
+    [LookupBy("cdma-meids")]
+    public class CdmaMeid: ApiLookup
     {
         public String id { get; set; }
         public String anonymised { get; set; }
@@ -98,7 +140,8 @@ namespace Reincubate.DeviceIdentifier
         public ReportingBodyIdentifier regionCode { get; set; }
     }
 
-    public class GsmaImei
+    [LookupBy("gsma-imeis")]
+    public class GsmaImei : ApiLookup
     {
         public String id { get; set; }
         public String anonymised { get; set; }
@@ -111,7 +154,8 @@ namespace Reincubate.DeviceIdentifier
         public String type { get; set; }
     }
 
-    public class GsmaIccid
+    [LookupBy("gsma-iccids")]
+    public class GsmaIccid : ApiLookup
     {
         public String anonymised { get; set; }
         public String checksum { get; set; }
@@ -130,7 +174,8 @@ namespace Reincubate.DeviceIdentifier
         public String month { get; set; }
     }
 
-    public class GsmaTac
+    [LookupBy("gsma-tacs")]
+    public class GsmaTac : ApiLookup
     {
         public AppleIdentifier appleIdentifier { get; set; }
         public AppleModel appleModel { get; set; }
@@ -199,10 +244,12 @@ namespace Reincubate.DeviceIdentifier
 
     public class ReportingBodyIdentifier
     {
+        public String flags { get; set; }
         public String code { get; set; }
         public String group { get; set; }
         public String origin { get; set; }
     }
+
 
     public class UniqueId
     {

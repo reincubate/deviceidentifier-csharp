@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>e1ba916c-4ecd-4e96-8d89-51d2f401a7f3</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>deviceidentifier.test.common</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)TestEnhanceMetadata.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TestIdentifyIdentifier.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TestLookup.cs" />
+  </ItemGroup>
+</Project>
