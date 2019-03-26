@@ -10,15 +10,15 @@
   <PropertyGroup>
     <Title>Reincubate Device Identifier</Title>
     <Authors>Aidan Fitzpatrick</Authors>
-    <Copyright>Copyright © 2017</Copyright>
+    <Copyright>Copyright © 2019</Copyright>
     <Description>Utils to manipulate and learn from assorted device identifier formats via Reincubate's API.</Description>
     <PackageId>Reincubate.DeviceIdentifier</PackageId>
-    <PackageVersion>1.0.6.0</PackageVersion>
+    <PackageVersion>1.0.7.0</PackageVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageTags>ios</PackageTags>
     <PackageLicenseUrl>https://github.com/reincubate/deviceidentifier-csharp/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/reincubate/deviceidentifier-csharp/</PackageProjectUrl>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
     <Company>Reincubate</Company>
     <PackageIconUrl>https://www.reincubate.com/favicon.ico</PackageIconUrl>
   </PropertyGroup>
