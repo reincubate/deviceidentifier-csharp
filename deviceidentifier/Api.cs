@@ -21,7 +21,9 @@ namespace Reincubate.DeviceIdentifier
                             String _apple_udid = null,
                             String _cdma_meid = null,
                             String _gsma_imei = null, String _gsma_iccid = null,
-                            String _gsma_tac = null )
+                            String _gsma_tac = null,
+                            Dictionary<String, String> _additional = null
+                            )
         {
             apple_anumber = _apple_anumber;
             apple_identifier = _apple_identifier;
@@ -36,6 +38,7 @@ namespace Reincubate.DeviceIdentifier
             gsma_imei = _gsma_imei;
             gsma_iccid = _gsma_iccid;
             gsma_tac = _gsma_tac;
+            additional = _additional;
         }
 
         public String apple_anumber;
@@ -51,6 +54,7 @@ namespace Reincubate.DeviceIdentifier
         public String gsma_imei;
         public String gsma_iccid;
         public String gsma_tac;
+        public Dictionary<String, String> additional;
     }
 
     public class Api
